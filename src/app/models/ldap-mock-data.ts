@@ -13,7 +13,7 @@ export const LDAP_USERS: UserLdap[] = [
     employeNiveau: 120,
     dateEmbauche: '2020-01-01',
     publisherId: 1,
-    active: true,
+    active: false,
   },
   {
     login: 'test.v2',
