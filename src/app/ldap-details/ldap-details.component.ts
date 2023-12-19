@@ -5,11 +5,12 @@ import {UserLdap} from "../models/user-ldap";
 import {UsersService} from "../service/users.service";
 import {FormBuilder} from "@angular/forms";
 
-export abstract class LdapDetailsComponent implements OnInit{
+export abstract class LdapDetailsComponent{
   user: UserLdap | undefined;
   processLoadRunning: boolean = false;
   processValidateRunning: boolean = false;
   passwordPlaceHolder: string;
+  errorMessage = '';
   userForm = this.fb.group({
     login: [''],
     nom: [''],
@@ -21,16 +22,14 @@ export abstract class LdapDetailsComponent implements OnInit{
     mail: {value: '', disabled: true},
   });
 
-  constructor(public addForm: boolean, private usersService: UsersService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) {
+  protected constructor(public addForm: boolean, private fb: FormBuilder, private router: Router) {
+    this.passwordPlaceHolder = 'Mot de passe' + (this.addForm ? '' : ' (vide si inchangé)');
   }
 
   protected onInit(): void {
 
   }
 
-  ngOnInit(): void {
-    this.getUser();
-  }
 
   goToLdap(): void {
     this.router.navigate(['/users/list']).then((e) => {
