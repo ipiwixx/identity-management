@@ -3,7 +3,8 @@ import { Location } from '@angular/common';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserLdap} from "../models/user-ldap";
 import {UsersService} from "../service/users.service";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
+import {ConfirmValidParentMatcher, passwordMatchingValidator} from "./passwords-validator";
 
 export abstract class LdapDetailsComponent{
   user: UserLdap | undefined;
@@ -11,6 +12,7 @@ export abstract class LdapDetailsComponent{
   processValidateRunning: boolean = false;
   passwordPlaceHolder: string;
   errorMessage = '';
+  confirmValidParentMatcher = new ConfirmValidParentMatcher();
   userForm = this.fb.group({
     login: [''],
     nom: [''],
@@ -18,18 +20,30 @@ export abstract class LdapDetailsComponent{
     passwordGroup: this.fb.group({
       password: [''],
       confirmPassword: [''],
-    }),
+    }, { validators: passwordMatchingValidator }),
     mail: {value: '', disabled: true},
   });
 
+  get passwordForm() { return this.userForm.get('passwordGroup'); }
+
   protected constructor(public addForm: boolean, private fb: FormBuilder, private router: Router) {
     this.passwordPlaceHolder = 'Mot de passe' + (this.addForm ? '' : ' (vide si inchangé)');
+    if(this.addForm) {
+      this.passwordForm?.get('password')?.addValidators(Validators.required);
+      this.passwordForm?.get('confirmPassword')?.addValidators(Validators.required);
+    }
   }
 
   protected onInit(): void {
 
   }
 
+  getErrorMessage() : string {
+    if(this.passwordForm?.errors) {
+      return 'Les mots de passe ne correspondent pas';
+    }
+    return 'Entrez un mot de passe';
+  }
 
   goToLdap(): void {
     this.router.navigate(['/users/list']).then((e) => {
