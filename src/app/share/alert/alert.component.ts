@@ -14,7 +14,7 @@ export class AlertComponent implements OnInit {
   }
 
   ngOnInit() {
-    let alerte = 'alert-info';
+    let alert = 'alert-info';
     switch (this.type) {
       case 'succes': alert = 'alert-success'; break;
       case 'danger': alert = 'alert-danger'; break;

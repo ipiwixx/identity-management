@@ -8,7 +8,7 @@ import {LdapAddComponent} from "./ldap-add/ldap-add.component";
 
 const routes: Routes = [
   { path: 'users/list', component: LdapListComponent },
-  { path: 'users/add', component: LdapAddComponent },
+  { path: 'user/add', component: LdapAddComponent },
   { path: 'user/:id', component: LdapEditComponent },
   { path: '**', component: PagNotFoundComponent }
 ];
