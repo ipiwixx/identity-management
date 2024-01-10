@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe, NgIf } from '@angular/common';
+import {Router} from "@angular/router";
+import {AuthenticationService} from "../../security/authentication.service";
 
 @Component({
   selector: 'app-navbar',
@@ -17,9 +19,10 @@ export class NavbarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
 
-  logout(): void {
-
+  logout() {
+    AuthenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }

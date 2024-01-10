@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserLdap} from "../models/user-ldap";
-import {UsersService} from "../service/users.service";
+import {UserLdap} from "../../models/user-ldap";
+import {UsersService} from "../../service/users.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ConfirmValidParentMatcher, passwordMatchingValidator} from "./passwords-validator";
 
@@ -117,6 +117,7 @@ export abstract class LdapDetailsComponent{
 
   protected getUserFromFormControl(): UserLdap {
     return {
+      id: this.user===undefined ? undefined : this.user.id,
       login: this.formGetValue('login'),
       nom: this.formGetValue('nom'),
       prenom: this.formGetValue('prenom'),

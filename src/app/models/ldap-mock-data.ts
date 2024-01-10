@@ -2,6 +2,7 @@ import {UserLdap} from "./user-ldap";
 
 export const LDAP_USERS: UserLdap[] = [
   {
+    id: 1,
     login: 'test.v1',
     nom: 'v1',
     prenom: 'Test',
@@ -16,6 +17,7 @@ export const LDAP_USERS: UserLdap[] = [
     active: false,
   },
   {
+    id: 2,
     login: 'test.v2',
     nom: 'v2',
     prenom: 'Test',
