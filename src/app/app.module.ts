@@ -13,6 +13,7 @@ import {HttpClientInMemoryWebApiModule, InMemoryDbService} from "angular-in-memo
 import {InMemoryUsersService} from "./service/in-memory-users.service";
 import { LoginComponent } from './security/login/login.component';
 import {MatCardModule} from "@angular/material/card";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -25,13 +26,14 @@ import {MatCardModule} from "@angular/material/card";
     FormsModule,
     ReactiveFormsModule,
     AppMaterialModule,
-    //LdapManagementModule,
+    LdapManagementModule,
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
-        InMemoryUsersService, {dataEncapsulation: false}
+      InMemoryUsersService, {dataEncapsulation: false}
     ),
-    MatCardModule
+    MatCardModule,
+    MatInputModule
   ],
   providers: [],
   exports: [],

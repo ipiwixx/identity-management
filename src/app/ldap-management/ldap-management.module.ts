@@ -39,7 +39,6 @@ import {AppModule} from "../app.module";
         HttpClientInMemoryWebApiModule.forRoot(
             InMemoryUsersService, {dataEncapsulation: false}
         ),
-        AppModule
     ]
 })
 export class LdapManagementModule { }
